@@ -1,0 +1,13 @@
+h1, h2 {
+    text-align: center;
+    text-decoration: underline;
+}
+
+h4 {
+    text-decoration: underline;
+}
+  
+p {
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 20px;
+}
