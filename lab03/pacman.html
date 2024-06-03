@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript Arrays</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        #boardDisplay {
+            font-size: 1.5em;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>PACMAN</h1>
+    <p id="boardDisplay"></p>
+
+    <script>
+        function createGame(n) {
+            let pellet = ".";
+            let fruit = "@";
+            let ghost = "^";
+            let pacman = "C";
+            let half = Math.floor(n / 2);
+            let board = [];
+
+            for (let x = 0; x < n; x++) {
+                board.push(pellet);
+            }
+
+            board[half] = pacman;
+            board[Math.floor(Math.random() * n)] = fruit;
+            board[Math.floor(Math.random() * n)] = ghost;
+
+            console.log(board);
+            return board;
+        }
+
+        function moveLeft(game) {
+            let pacman = "C";
+            let pacmanLocation = game.indexOf("C");
+            if (pacmanLocation == -1) {
+                pacmanLocation = game.indexOf("C.");
+            }
+
+            if (pacmanLocation > 0) {
+                game[pacmanLocation] = ".";
+                game[pacmanLocation - 1] = pacman;
+            }
+
+            console.log(game);
+        }
+
+        function moveRight(game) {
+            let pacman = "C";
+            let pacmanLocation = game.indexOf("C");
+            if (pacmanLocation == -1) {
+                pacmanLocation = game.indexOf("C.");
+            }
+
+            if (pacmanLocation < game.length - 1) {
+                game[pacmanLocation] = ".";
+                game[pacmanLocation + 1] = pacman;
+            }
+
+            console.log(game);
+        }
+
+        function updateBoardDisplay(board) {
+            document.getElementById("boardDisplay").innerText = board.join(" ");
+        }
+
+        // Create game board and display it in the <p> tag
+        let gameBoard = createGame(100);
+        updateBoardDisplay(gameBoard);
+
+        // Event listener for keydown events
+        document.addEventListener("keydown", function(event) {
+            if (event.key === "ArrowLeft") {
+                moveLeft(gameBoard);
+                updateBoardDisplay(gameBoard);
+            } else if (event.key === "ArrowRight") {
+                moveRight(gameBoard);
+                updateBoardDisplay(gameBoard);
+            }
+        });
+    </script>
+</body>
+</html>
